@@ -28,7 +28,7 @@
         </div>
     </header>
 
-    <section class="hero">
+    <section class="hero section-animate">
         <div class="container">
             <h1 class="title">NEXORA <br> نحن لا نتبع الاتجاهات. نحن نصنعها</h1>
             <p>في عالم يتغير كل ثانية، نقف نحن – Nexora – بثبات، ليس فقط لتقديم الخدمات، ولكن لرسم ملامح جديدة للسوق.</p>
@@ -36,7 +36,7 @@
         </div>
     </section>
 
-    <section id="about" class="about">
+    <section id="about" class="about section-animate">
         <div class="container">
             <h2 class="section-title">من نحن؟</h2>
             <div class="about-content">
@@ -52,7 +52,7 @@
         </div>
     </section>
 
-    <section id="services" class="services">
+    <section id="services" class="services section-animate">
         <div class="container">
             <h2 class="section-title">خدماتنا</h2>
             <div class="services-grid">
@@ -80,14 +80,14 @@
         </div>
     </section>
 
-    <section id="team" class="team">
+    <section id="team" class="team section-animate">
         <div class="container">
             <h2 class="section-title">فريق Nexora</h2>
             <p class="text-center mb-5">فريق من المحترفين الشغوفين الذين يعملون بجد لتحقيق رؤيتنا</p>
             <div class="team-grid">
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="https://via.placeholder.com/300x300" alt="Team Member" width="100%" height="100%">
+                        <!-- Image removed -->
                     </div>
                     <div class="member-info">
                         <h3 class="member-name">إياد محمد</h3>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="https://via.placeholder.com/300x300" alt="Team Member" width="100%" height="100%">
+                        <!-- Image removed -->
                     </div>
                     <div class="member-info">
                         <h3 class="member-name"> مصطفى درش</h3>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="https://via.placeholder.com/300x300" alt="Team Member" width="100%" height="100%">
+                        <!-- Image removed -->
                     </div>
                     <div class="member-info">
                         <h3 class="member-name">مصطفى محمد</h3>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="https://via.placeholder.com/300x300" alt="Team Member" width="100%" height="100%">
+                        <!-- Image removed -->
                     </div>
                     <div class="member-info">
                         <h3 class="member-name">ادهم محمد جمال (v)</h3>
@@ -129,7 +129,7 @@
         </div>
     </section>
 
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio" class="portfolio section-animate">
         <div class="container">
             <h2 class="section-title">أعمالنا</h2>
             <p class="text-center mb-5">إليك نظرة على بعض مشاريعنا السابقة</p>
@@ -192,33 +192,7 @@
         </div>
     </section>
 
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2 class="section-title">قالوا عنا</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "تعاملنا مع Nexora كان تجربة مميزة. فريق محترف يفهم احتياجاتنا ويقدم حلولاً مبتكرة تتجاوز توقعاتنا."
-                    </p>
-                    <p class="testimonial-author">محمد سامي - المدير التنفيذي لشركة تيك ستارت</p>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "الترجمة الاحترافية التي قدمتها Nexora ساعدتنا في الوصول إلى جمهور أوسع وتحقيق نمو كبير في أعمالنا الدولية."
-                    </p>
-                    <p class="testimonial-author">ليلى عادل - مديرة التسويق في شركة جلوبال تيك</p>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "استراتيجية التسويق الرقمي التي طورتها Nexora ساهمت في زيادة المبيعات بنسبة 150% خلال ثلاثة أشهر فقط."
-                    </p>
-                    <p class="testimonial-author">كريم حسن - مؤسس موقع شوب إيزي</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
+    <section id="contact" class="contact section-animate">
         <div class="container">
             <h2 class="section-title">اتصل بنا</h2>
             <p class="text-center mb-5">هل تريد أن تكون جزءًا من قصتنا؟ تواصل معنا الآن!</p>
@@ -343,5 +317,28 @@
     <button class="chat-widget-button" id="openChatBtn">
         <i class="fas fa-comments"></i>
     </button>
+    <script>
+    // Section and team card animation on scroll
+    function animateOnScroll() {
+      const sections = document.querySelectorAll('.section-animate');
+      const teamMembers = document.querySelectorAll('.team-member');
+      const trigger = window.innerHeight * 0.85;
+
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < trigger) {
+          section.classList.add('visible');
+        }
+      });
+      teamMembers.forEach((member, i) => {
+        const rect = member.getBoundingClientRect();
+        if (rect.top < trigger) {
+          setTimeout(() => member.classList.add('visible'), i * 120);
+        }
+      });
+    }
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('DOMContentLoaded', animateOnScroll);
+    </script>
 </body>
 </html>

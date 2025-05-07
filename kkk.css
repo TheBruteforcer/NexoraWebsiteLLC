@@ -781,3 +781,72 @@ footer {
         bottom: 10px;
     }
 }
+
+/* Animations for sections */
+.section-animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(.4,2,.6,1), transform 0.7s cubic-bezier(.4,2,.6,1);
+}
+.section-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Team card animation */
+.team-member {
+  transition: box-shadow 0.3s, transform 0.3s, border 0.3s, opacity 0.7s cubic-bezier(.4,2,.6,1), transform 0.7s cubic-bezier(.4,2,.6,1);
+  opacity: 0;
+  transform: translateY(40px);
+}
+.team-member.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card hover effect improvement */
+.service-card:hover, .team-member:hover, .portfolio-item:hover, .testimonial-card:hover {
+  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25), 0 2px 10px rgba(0,0,0,0.5);
+  transform: translateY(-12px) scale(1.03);
+  border: 1.5px solid var(--primary);
+}
+
+/* Button pulse animation */
+.btn, .submit-btn {
+  position: relative;
+  overflow: hidden;
+}
+.btn::after, .submit-btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 215, 0, 0.2);
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+  z-index: 0;
+}
+.btn:active::after, .submit-btn:active::after {
+  width: 200px;
+  height: 200px;
+}
+
+/* Chatbot pulse on open */
+.chat-widget.active {
+  animation: fadeInUp 0.4s cubic-bezier(.4,2,.6,1) forwards, pulseShadow 1.2s infinite alternate;
+}
+@keyframes pulseShadow {
+  from { box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37), 0 0 0 4px var(--primary); }
+  to { box-shadow: 0 16px 48px 0 rgba(0,0,0,0.47), 0 0 0 8px var(--primary); }
+}
+
+/* Utility: hide until animated */
+.invisible { opacity: 0 !important; }
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
