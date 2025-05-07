@@ -30,17 +30,17 @@
 
     <section class="hero section-animate">
         <div class="container" style="position:relative;">
-            <!-- Rotating Earth SVG background -->
+            <!-- Realistic Rotating Earth SVG background -->
             <svg id="rotating-earth" width="320" height="320" viewBox="0 0 320 320" style="position:absolute;left:50%;top:30px;transform:translateX(-50%);z-index:0;opacity:0.18;pointer-events:none;">
-                <g>
-                    <circle cx="160" cy="160" r="140" fill="#FFD700"/>
-                    <circle cx="160" cy="160" r="120" fill="#222"/>
-                    <path id="earth-path" d="M160,40 a120,120 0 1,0 0.1,0" fill="none" stroke="#FFD700" stroke-width="6"/>
-                    <ellipse cx="160" cy="160" rx="100" ry="40" fill="none" stroke="#FFD700" stroke-width="2"/>
-                    <ellipse cx="160" cy="160" rx="60" ry="100" fill="none" stroke="#FFD700" stroke-width="2"/>
-                </g>
+                <defs>
+                    <pattern id="earthTexture" patternUnits="objectBoundingBox" width="1" height="1">
+                        <image href="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" x="0" y="0" width="320" height="320" preserveAspectRatio="xMidYMid slice"/>
+                    </pattern>
+                </defs>
+                <circle cx="160" cy="160" r="140" fill="url(#earthTexture)"/>
+                <circle cx="160" cy="160" r="140" fill="none" stroke="#FFD700" stroke-width="6"/>
             </svg>
-            <h1 class="title" style="position:relative;z-index:1;">🌍 NEXORA <br> نحن لا نتبع الاتجاهات. نحن نصنعها 🚀</h1>
+            <h1 class="title" style="position:relative;z-index:1;">NEXORA <br> نحن لا نتبع الاتجاهات. نحن نصنعها 🚀</h1>
             <p style="position:relative;z-index:1;">في عالم يتغير كل ثانية، نقف نحن – Nexora – بثبات، ليس فقط لتقديم الخدمات، ولكن لرسم ملامح جديدة للسوق.</p>
             <a href="#contact" class="btn" style="position:relative;z-index:1;">تواصل معنا <i class="fas fa-paper-plane"></i></a>
         </div>
