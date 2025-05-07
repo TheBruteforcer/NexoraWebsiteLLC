@@ -1,4 +1,4 @@
-// Chatbot functionality with enhanced AI features
+// Chatbot functionality with Groq API integration
 document.addEventListener('DOMContentLoaded', function() {
     const chatWidget = document.getElementById('chatWidget');
     const openChatBtn = document.getElementById('openChatBtn');
@@ -6,148 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const userInput = document.getElementById('userInput');
     const sendMessageBtn = document.getElementById('sendMessageBtn');
     const chatMessages = document.getElementById('chatMessages');
-
-    const responses = {
-        default: "عذراً، لم أفهم سؤالك. هل يمكنك إعادة صياغته بطريقة أخرى؟ يمكنني مساعدتك في معرفة المزيد عن خدماتنا، أسعارنا، أو كيفية التواصل معنا.",
-        greetings: [
-            "مرحباً! كيف يمكنني مساعدتك اليوم؟",
-            "أهلاً بك في Nexora! كيف حالك؟",
-            "وعليكم السلام ورحمة الله وبركاته! يسعدني مساعدتك.",
-            "هلا وغلا! كيف يمكنني خدمتك اليوم؟",
-            "أهلاً وسهلاً! تشرفنا بخدمتك.",
-            "صباح النور! كيف يمكنني مساعدتك؟",
-            "مساء الخير! أنا هنا لمساعدتك.",
-            "ياهلا! كيف حالك اليوم؟",
-            "حياك الله! كيف يمكنني مساعدتك؟"
-        ],
-        services: {
-            general: "نقدم مجموعة متكاملة من الخدمات التسويقية والإبداعية:",
-            translation: "خدمات الترجمة الاحترافية تشمل:\n- ترجمة المواقع الإلكترونية\n- ترجمة المحتوى التسويقي\n- ترجمة الوثائق القانونية\n- ترجمة المحتوى التقني\n- خدمات التدقيق اللغوي",
-            marketing: "خدمات التسويق الرقمي تشمل:\n- إدارة وسائل التواصل الاجتماعي\n- حملات الإعلانات المدفوعة\n- تحسين محركات البحث (SEO)\n- تسويق المحتوى\n- إدارة حملات البريد الإلكتروني",
-            content: "خدمات كتابة المحتوى تشمل:\n- كتابة المقالات والمدونات\n- محتوى وسائل التواصل الاجتماعي\n- نصوص إعلانية\n- وصف المنتجات\n- المحتوى التقني",
-            design: "خدمات التصميم الإبداعي تشمل:\n- تصميم الهوية البصرية\n- تصميم المواقع الإلكترونية\n- تصميم وسائل التواصل الاجتماعي\n- تصميم المطبوعات\n- تصميم الإعلانات"
-        },
-        pricing: {
-            general: "نقدم أسعاراً تنافسية تناسب مختلف الميزانيات. الأسعار تعتمد على نطاق المشروع واحتياجاتك الخاصة.",
-            translation: "أسعار الترجمة تبدأ من 0.08$ للكلمة، مع خصومات للمشاريع الكبيرة.",
-            marketing: "باقات التسويق الرقمي تبدأ من 500$ شهرياً، وتشمل إدارة كاملة لحسابات التواصل الاجتماعي.",
-            content: "أسعار كتابة المحتوى تبدأ من 0.10$ للكلمة، مع باقات شهرية مخصصة.",
-            design: "تصميم الهوية البصرية يبدأ من 1000$، وتصميم وسائل التواصل الاجتماعي من 300$ شهرياً."
-        },
-        contact: {
-            general: "يمكنك التواصل معنا عبر عدة قنوات:",
-            email: "البريد الإلكتروني: info@nexora.com",
-            phone: "الهاتف: +00000000000",
-            social: "تابعنا على:\nفيسبوك: Nexora\nإنستغرام: @Nexora\nلينكد إن: Nexora",
-            office: "مقرنا في مصر",
-            form: "يمكنك أيضاً ملء نموذج التواصل في الأسفل وسنرد عليك خلال 24 ساعة."
-        },
-        portfolio: {
-            translation: "لدينا خبرة في ترجمة مواقع لشركات عالمية وتقارير سنوية لمؤسسات كبرى.",
-            marketing: "حققنا نجاحات كبيرة في حملات التسويق الرقمي، مع زيادة المبيعات بنسبة تصل إلى 150%.",
-            content: "كتبنا محتوى لأكثر من 10 شركة في مختلف المجالات.",
-            design: "صممنا هويات بصرية لعلامات تجارية رائدة في السوق."
-        },
-        team: "فريقنا يضم نخبة من المتخصصين في مجالات:\n- الترجمة الاحترافية\n- التسويق الرقمي\n- كتابة المحتوى\n- التصميم الإبداعي",
-        process: {
-            general: "نتبع منهجية عمل احترافية تضمن أفضل النتائج:",
-            steps: "1. تحليل احتياجاتك\n2. وضع استراتيجية مخصصة\n3. التنفيذ باحترافية\n4. المراجعة والتحسين\n5. قياس النتائج"
-        },
-        services_questions: {
-            general: {
-                question: [
-                    "ايه الخدمات اللي بتقدموها",
-                    "بتقدموا ايه",
-                    "ما هي خدماتكم",
-                    "خدماتكم ايه",
-                    "عندكم ايه",
-                    "بتعملوا ايه بالظبط",
-                    "ايه مجالات شغلكم"
-                ],
-                answer: "نقدم مجموعة متكاملة من الخدمات المتميزة 🌟\n\n\n" +
-
-                    "1️⃣ خدمات الترجمة الاحترافية:\n" +
-                    "   - ترجمة معتمدة للوثائق القانونية\n" +
-                    "   - ترجمة المواقع والتطبيقات\n" +
-                    "   - ترجمة المحتوى التقني والطبي\n" +
-                    "   - خدمات التعريب الشامل\n\n\n" +
-
-                    "2️⃣ خدمات التسويق الرقمي:\n" +
-                    "   - إدارة حسابات السوشيال ميديا\n" +
-                    "   - إدارة الحملات الإعلانية\n" +
-                    "   - تحسين محركات البحث SEO\n" +
-                    "   - التسويق عبر البريد الإلكتروني\n\n\n" +
-
-                    "3️⃣ خدمات كتابة المحتوى:\n" +
-                    "   - كتابة المقالات والمدونات\n" +
-                    "   - محتوى السوشيال ميديا\n" +
-                    "   - وصف المنتجات والخدمات\n" +
-                    "   - المحتوى التقني والتسويقي\n\n\n" +
-
-                    "4️⃣ خدمات التصميم الإبداعي:\n" +
-                    "   - تصميم الهوية البصرية\n" +
-                    "   - تصميم المواقع الإلكترونية\n" +
-                    "   - تصميم السوشيال ميديا\n" +
-                    "   - تصميم المطبوعات\n\n\n" +
-
-                    "✨ مميزاتنا:\n" +
-                    "   - فريق محترف متخصص\n" +
-                    "   - جودة عالية في التنفيذ\n" +
-                    "   - أسعار تنافسية\n" +
-                    "   - دعم فني مستمر\n" +
-                    "   - تسليم في الموعد المحدد\n\n\n" +
-
-                    "للمزيد من التفاصيل عن أي خدمة، يمكنك السؤال عنها بشكل محدد 💫"
-            },
-            prices: {
-                packages: {
-                    question: ["الباقات", "عروض الاسعار", "باقات الخدمات"],
-                    answer: "نقدم باقات متنوعة تناسب جميع الاحتياجات:\n\n\n" +
-
-                        "1. الباقة الأساسية (500$ شهرياً):\n" +
-                        "   - إدارة 3 منصات تواصل اجتماعي\n" +
-                        "   - 15 تصميم شهرياً\n" +
-                        "   - تقرير شهري\n\n\n" +
-
-                        "2. الباقة المتقدمة (1000$ شهرياً):\n" +
-                        "   - إدارة 5 منصات تواصل اجتماعي\n" +
-                        "   - 30 تصميم شهرياً\n" +
-                        "   - حملات إعلانية\n" +
-                        "   - تقارير أسبوعية\n\n\n" +
-
-                        "3. الباقة الاحترافية (2000$ شهرياً):\n" +
-                        "   - إدارة كاملة لجميع المنصات\n" +
-                        "   - تصاميم غير محدودة\n" +
-                        "   - استراتيجية تسويق شاملة\n" +
-                        "   - تقارير يومية"
-                },
-                contact: {
-                    question: ["كيف اتواصل", "معلومات الاتصال", "ارقام التواصل"],
-                    answer: "يمكنك التواصل معنا في أي وقت 📞\n\n\n" +
-
-                        "📱 الواتساب (متاح 24/7):\n" +
-                        "- +20000000000\n" +
-                        "- رد فوري للحالات العاجلة\n\n\n" +
-
-                        "📧 البريد الإلكتروني:\n" +
-                        "- info@nexora.com\n" +
-                        "- متابعة مستمرة للرسائل\n\n\n" +
-
-                        "🌐 حساباتنا على السوشيال ميديا:\n" +
-                        "- فيسبوك: https://www.facebook.com/profile.php?id=61575374715077\n" +
-                        "- انستجرام: @Nexora\n" +
-                        "- لينكد إن: https://www.linkedin.com/in/nexora-m-593039329/"
-                }
-            }
-        },
-        context_aware_responses: {
-            pricing_after_service: {
-                translation: "بناءً على اهتمامك بخدمات الترجمة، أود إخبارك أن أسعارنا تبدأ من 0.08$ للكلمة مع خصومات خاصة للمشاريع الكبيرة. هل تريد معرفة المزيد عن باقاتنا؟",
-                marketing: "نظراً لاهتمامك بالتسويق الرقمي، لدينا باقات تبدأ من 500$ شهرياً تشمل إدارة كاملة لمنصات التواصل الاجتماعي. هل تريد معرفة تفاصيل الباقات؟",
-            }
-        }
-    };
-
+    
+    // API Configuration
+    const GROQ_API_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
+    // IMPORTANT: In production, use environment variables or a secure method to store API keys
+    // Don't expose API keys in client-side code - this should be handled by your backend
+    let GROQ_API_KEY = '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'; // This should be set securely from your backend
+    
+    // Conversation context to track user interaction
     let conversationContext = {
         lastTopic: null,
         interests: [],
@@ -161,6 +27,28 @@ document.addEventListener('DOMContentLoaded', function() {
         // Animation
         void chatWidget.offsetWidth;
         chatWidget.classList.add('active');
+        
+        // If this is the first time opening the chat, send a greeting message
+        if (conversationContext.messageHistory.length === 0) {
+            setTimeout(() => {
+                // Instead of using a static greeting, we'll use the API
+                const initialSystemMessage = {
+                    role: "system",
+                    content: `أنت مساعد افتراضي محترف لشركة Nexora. شركتنا متخصصة في تقديم خدمات الترجمة الاحترافية، التسويق الرقمي، كتابة المحتوى، والتصميم الإبداعي.
+                    
+                    مهمتك هي استقبال العملاء بترحيب لطيف والرد على استفساراتهم باللغة العربية فقط.
+                    
+                    الآن قدم تحية ترحيبية موجزة وودية للعميل الجديد.`
+                };
+                const initialUserMessage = {
+                    role: "user",
+                    content: "مرحباً"
+                };
+                
+                showTypingIndicator();
+                callGroqAPI([initialSystemMessage, initialUserMessage]);
+            }, 500);
+        }
     });
 
     closeChatBtn.addEventListener('click', () => {
@@ -188,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.stopPropagation();
     });
 
-    // Enhanced message handling with context awareness
+    // UI Functions
     function addMessage(message, isUser = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
@@ -197,15 +85,53 @@ document.addEventListener('DOMContentLoaded', function() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
+    // Show typing indicator while waiting for API response
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot typing';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = '<span>.</span><span>.</span><span>.</span>';
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const typingDiv = document.getElementById('typingIndicator');
+        if (typingDiv) {
+            typingDiv.remove();
+        }
+    }
+
     function handleUserMessage() {
         const message = userInput.value.trim();
         if (message) {
             addMessage(message, true);
             userInput.value = '';
-            processUserMessage(message);
+            
+            // Add message to history
+            conversationContext.messageHistory.push({
+                role: 'user',
+                content: message
+            });
+            
+            // Analyze the message for topic and context
+            analyzeMessage(message);
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Process via API
+            const systemMessage = createSystemMessage();
+            const messages = [
+                { role: "system", content: systemMessage },
+                ...conversationContext.messageHistory.slice(-10) // Last 10 messages for context
+            ];
+            
+            callGroqAPI(messages);
         }
     }
 
+    // Message analysis functions to build better context
     function analyzeMessage(message) {
         const keywords = {
             translation: ['ترجمة', 'مترجم', 'لغات', 'تعريب'],
@@ -217,10 +143,11 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         for (const [category, words] of Object.entries(keywords)) {
-            if (words.some(word => message.includes(word))) {
+            if (words.some(word => message.toLowerCase().includes(word))) {
                 if (!conversationContext.interests.includes(category)) {
                     conversationContext.interests.unshift(category);
                 }
+                conversationContext.lastTopic = category;
                 return category;
             }
         }
@@ -228,83 +155,147 @@ document.addEventListener('DOMContentLoaded', function() {
         return null;
     }
 
-    function processUserMessage(message) {
-        message = message.trim().toLowerCase();
-        const messageType = analyzeMessage(message);
-        
-        // Update context
-        if (messageType) {
-            conversationContext.lastTopic = messageType;
+    // Create a comprehensive system message with all the knowledge base
+    function createSystemMessage() {
+        // Base system prompt
+        let systemMessage = `أنت مساعد افتراضي محترف لشركة Nexora. يجب أن ترد دائماً باللغة العربية فقط.
+
+شركتنا متخصصة في تقديم الخدمات التالية:
+
+**خدمات الترجمة الاحترافية**:
+- ترجمة المواقع الإلكترونية
+- ترجمة المحتوى التسويقي
+- ترجمة الوثائق القانونية
+- ترجمة المحتوى التقني
+- خدمات التدقيق اللغوي
+
+**خدمات التسويق الرقمي**:
+- إدارة وسائل التواصل الاجتماعي
+- حملات الإعلانات المدفوعة
+- تحسين محركات البحث (SEO)
+- تسويق المحتوى
+- إدارة حملات البريد الإلكتروني
+
+**خدمات كتابة المحتوى**:
+- كتابة المقالات والمدونات
+- محتوى وسائل التواصل الاجتماعي
+- نصوص إعلانية
+- وصف المنتجات
+- المحتوى التقني
+
+**خدمات التصميم الإبداعي**:
+- تصميم الهوية البصرية
+- تصميم المواقع الإلكترونية
+- تصميم وسائل التواصل الاجتماعي
+- تصميم المطبوعات
+- تصميم الإعلانات
+
+**معلومات الأسعار**:
+- أسعار الترجمة تبدأ من 0.08$ للكلمة، مع خصومات للمشاريع الكبيرة.
+- باقات التسويق الرقمي تبدأ من 500$ شهرياً، وتشمل إدارة كاملة لحسابات التواصل الاجتماعي.
+- أسعار كتابة المحتوى تبدأ من 0.10$ للكلمة، مع باقات شهرية مخصصة.
+- تصميم الهوية البصرية يبدأ من 1000$، وتصميم وسائل التواصل الاجتماعي من 300$ شهرياً.
+
+**باقاتنا**:
+1. الباقة الأساسية (500$ شهرياً):
+   - إدارة 3 منصات تواصل اجتماعي
+   - 15 تصميم شهرياً
+   - تقرير شهري
+
+2. الباقة المتقدمة (1000$ شهرياً):
+   - إدارة 5 منصات تواصل اجتماعي
+   - 30 تصميم شهرياً
+   - حملات إعلانية
+   - تقارير أسبوعية
+
+3. الباقة الاحترافية (2000$ شهرياً):
+   - إدارة كاملة لجميع المنصات
+   - تصاميم غير محدودة
+   - استراتيجية تسويق شاملة
+   - تقارير يومية
+
+**معلومات التواصل**:
+- البريد الإلكتروني: info@nexora.com
+- الهاتف: +00000000000
+- وسائل التواصل الاجتماعي: فيسبوك: Nexora - إنستغرام: @Nexora - لينكد إن: Nexora
+- مقرنا في مصر
+
+**تجربتنا**:
+- لدينا خبرة في ترجمة مواقع لشركات عالمية وتقارير سنوية لمؤسسات كبرى.
+- حققنا نجاحات كبيرة في حملات التسويق الرقمي، مع زيادة المبيعات بنسبة تصل إلى 150%.
+- كتبنا محتوى لأكثر من 10 شركة في مختلف المجالات.
+- صممنا هويات بصرية لعلامات تجارية رائدة في السوق.`;
+
+        // Add context from the conversation
+        if (conversationContext.lastTopic) {
+            systemMessage += `\n\nالعميل مهتم خصوصاً بـ: ${conversationContext.lastTopic}`;
         }
 
-        // Check for combined contexts
-        if (messageType === 'pricing' && conversationContext.lastTopic) {
-            const previousService = conversationContext.lastTopic;
-            if (responses.context_aware_responses.pricing_after_service[previousService]) {
-                setTimeout(() => {
-                    addMessage(responses.context_aware_responses.pricing_after_service[previousService]);
-                }, 500);
-                return;
-            }
+        if (conversationContext.interests.length > 0) {
+            systemMessage += `\n\nاهتمامات العميل تشمل: ${conversationContext.interests.join(', ')}`;
         }
 
-        // Handle greetings
-        if (isGreeting(message)) {
-            setTimeout(() => {
-                const randomGreeting = responses.greetings[Math.floor(Math.random() * responses.greetings.length)];
-                addMessage(randomGreeting);
-            }, 500);
-            return;
-        }
+        // Add formatting instructions
+        systemMessage += `\n\nتعليمات إضافية:
+- قدم إجابات موجزة ومباشرة.
+- استخدم لغة ودية ومهنية.
+- يمكنك استخدام الرموز التعبيرية بشكل معتدل.
+- اذكر معلومات التواصل عندما يسأل العميل عن كيفية الاتصال.
+- لا تخترع معلومات غير موجودة في المعلومات المقدمة لك.
+- إذا كان العميل يبحث عن خدمة لا نقدمها، اقترح الخدمة الأقرب من خدماتنا المتاحة.`;
 
-        // Service specific responses
-        if (messageType === 'translation' || messageType === 'marketing' || 
-            messageType === 'content' || messageType === 'design') {
-            setTimeout(() => {
-                addMessage(responses.services[messageType]);
-                // Add follow-up suggestion
-                setTimeout(() => {
-                    addMessage("هل ترغب في معرفة أسعار هذه الخدمة؟");
-                }, 500);
-            }, 500);
-            return;
-        }
-
-        // Pricing responses with context
-        if (messageType === 'pricing') {
-            setTimeout(() => {
-                if (conversationContext.lastTopic && conversationContext.lastTopic !== 'pricing') {
-                    addMessage(responses.pricing[conversationContext.lastTopic]);
-                } else {
-                    addMessage(responses.pricing.general);
-                }
-            }, 500);
-            return;
-        }
-
-        // Contact information
-        if (messageType === 'contact') {
-            setTimeout(() => {
-                addMessage(responses.contact.general + "\n" + responses.contact.email + "\n" + 
-                         responses.contact.phone + "\n" + responses.contact.social);
-            }, 500);
-            return;
-        }
-
-        // Default response
-        setTimeout(() => {
-            addMessage(responses.default);
-        }, 500);
+        return systemMessage;
     }
 
-    // Helper function to check for greetings
-    function isGreeting(message) {
-        const greetings = [
-            "مرحبا", "اهلا", "السلام", "هاي", "هلا", "صباح", "مساء",
-            "صباح الخير", "مساء الخير", "صباح النور", "مساء النور", 
-            "هلو", "سلام", "حياك"
-        ];
-        return greetings.some(greeting => message.toLowerCase().includes(greeting));
+    // API Integration
+    async function callGroqAPI(messages) {
+        try {
+            const response = await fetch(GROQ_API_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${GROQ_API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: "llama-3.3-70b-versatile",
+                    messages: messages,
+                    temperature: 0.7,
+                    max_tokens: 500
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`API error: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            const botResponse = result.choices[0].message.content;
+            
+            // Remove typing indicator and add bot response
+            removeTypingIndicator();
+            addMessage(botResponse);
+            
+            // Add to message history
+            conversationContext.messageHistory.push({
+                role: 'assistant',
+                content: botResponse
+            });
+            
+        } catch (error) {
+            console.error("Error calling API:", error);
+            
+            // Fallback for when API fails
+            removeTypingIndicator();
+            
+            // Simple fallback response in case of API failure
+            const fallbackResponse = "عذراً، واجهنا مشكلة في النظام. هل يمكنك المحاولة مرة أخرى لاحقاً؟ يمكنك أيضاً التواصل معنا مباشرة عبر البريد الإلكتروني info@nexora.com أو الهاتف +00000000000";
+            addMessage(fallbackResponse);
+            
+            conversationContext.messageHistory.push({
+                role: 'assistant',
+                content: fallbackResponse
+            });
+        }
     }
 
     // Event listeners
@@ -314,4 +305,22 @@ document.addEventListener('DOMContentLoaded', function() {
             handleUserMessage();
         }
     });
+
+    // Initialize with API key from backend
+    // In a real implementation, you should load this securely from your server
+    // This is just a placeholder for demonstration
+    function initializeAPIKey() {
+        // In a real implementation, you might do something like:
+        // fetch('/api/get-groq-key')
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         GROQ_API_KEY = data.apiKey;
+        //     });
+        
+        // For demo purposes:
+        GROQ_API_KEY = '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'; // Replace with your actual key
+    }
+    
+    // Call initialization
+    initializeAPIKey();
 });
