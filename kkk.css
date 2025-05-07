@@ -72,11 +72,21 @@ nav ul li a:hover {
 }
 
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/api/placeholder/1200/500') center/cover no-repeat;
+    background: var(--secondary);
     color: white;
     padding: 8rem 0;
     text-align: center;
     border-bottom: 2px solid var(--primary);
+    box-shadow: none;
+}
+
+.title {
+    background: none;
+    color: var(--primary);
+    text-shadow: none;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
 .hero h1 {
@@ -684,22 +694,23 @@ footer {
 }
 
 #sendMessageBtn {
-    background: var(--primary);
-    color: var(--dark);
+    background: none;
+    color: var(--primary);
     border: none;
     border-radius: 50%;
     width: 44px;
     height: 44px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.2s, color 0.2s;
+    box-shadow: none;
 }
 #sendMessageBtn:hover {
-    background: #fffbe6;
-    color: var(--primary);
+    background: var(--primary);
+    color: var(--dark);
 }
 
 .chat-widget-button {
