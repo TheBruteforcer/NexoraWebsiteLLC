@@ -480,10 +480,11 @@ textarea.form-control {
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
+
 footer {
     background-color: #000;
     color: #fff;
-    padding: 3rem 0;
+    padding: 2rem 0;
     text-align: center;
     border-top: 1px solid var(--primary);
 }
@@ -496,16 +497,16 @@ footer {
 
 .footer-section {
     flex: 1;
-    min-width: 250px;
-    padding: 1rem;
+    min-width: 200px;
+    padding: 0.75rem;
 }
 
 .footer-logo {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     color: var(--primary);
-    text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 0 3px rgba(212, 175, 55, 0.3);
 }
 
 .footer-links {
@@ -513,7 +514,7 @@ footer {
 }
 
 .footer-links li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .footer-links a {
@@ -529,100 +530,55 @@ footer {
 .social-links {
     display: flex;
     justify-content: flex-start;
-    gap: 1.2rem;
-    margin-top: 2.5rem;
-    padding: 1rem;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem;
     background: rgba(255, 255, 255, 0.03);
-    border-radius: 15px;
+    border-radius: 10px;
     border: 1px solid rgba(255, 215, 0, 0.1);
     backdrop-filter: blur(5px);
     transition: all 0.3s ease;
 }
 
-.social-links:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 215, 0, 0.2);
-    transform: translateY(-3px);
-}
-
 .social-link {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--primary);
-    font-size: 1.3rem;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     background: rgba(0, 0, 0, 0.3);
-    border: 2px solid var(--primary);
-}
-
-.social-link::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, var(--primary), #FFA500);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-}
-
-.social-link::after {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(45deg, var(--primary), transparent, var(--primary));
-    animation: rotate 4s linear infinite;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.social-link i {
-    position: relative;
-    z-index: 2;
-    transition: all 0.3s ease;
+    border: 1px solid var(--primary);
 }
 
 .social-link:hover {
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
-}
-
-.social-link:hover::before {
-    opacity: 0.15;
-}
-
-.social-link:hover::after {
-    opacity: 1;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(255, 215, 0, 0.2);
 }
 
 .social-link:hover i {
-    transform: scale(1.2);
+    transform: scale(1.1);
     color: #ffffff;
 }
 
-/* تأثيرات خاصة لكل منصة */
+/* تأثيرات خاصة لكل منصة - مبسطة */
 .social-link[aria-label="Facebook"]:hover {
-    background: linear-gradient(45deg, #4267B2, #3b5998);
+    background: #4267B2;
     border-color: #4267B2;
 }
 
 .social-link[aria-label="Instagram"]:hover {
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743);
     border-color: #e1306c;
 }
 
 .social-link[aria-label="LinkedIn"]:hover {
-    background: linear-gradient(45deg, #0077B5, #00a0dc);
+    background: #0077B5;
     border-color: #0077B5;
 }
 
@@ -635,22 +591,53 @@ footer {
 @media (max-width: 768px) {
     .social-links {
         justify-content: center;
-        padding: 0.8rem;
+        padding: 0.6rem;
     }
     
     .social-link {
-        width: 45px;
-        height: 45px;
-        font-size: 1.2rem;
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
     }
 }
 
 .copyright {
-    margin-top: 2rem;
-    padding-top: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 0.75rem;
     border-top: 1px solid rgba(212, 175, 55, 0.2);
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.highlight {
+    color: var(--primary);
+}
+/* تحسين التجاوب مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .social-links {
+        justify-content: center;
+        padding: 0.6rem;  /* تم تقليل الـpadding من 0.8rem إلى 0.6rem */
+    }
+    
+    .social-link {
+        width: 35px;  /* تم تقليل العرض من 45px إلى 35px */
+        height: 35px;  /* تم تقليل الارتفاع من 45px إلى 35px */
+        font-size: 1rem;  /* تم تقليل حجم الخط من 1.2rem إلى 1rem */
+    }
+}
+
+.copyright {
+    margin-top: 1.5rem;  /* تم تقليل الهامش من 2rem إلى 1.5rem */
+    padding-top: 0.75rem;  /* تم تقليل الـpadding من 1rem إلى 0.75rem */
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    text-align: center;
+    font-size: 0.8rem;  /* تم تقليل حجم الخط من 0.9rem إلى 0.8rem */
     color: #aaa;
 }
 
