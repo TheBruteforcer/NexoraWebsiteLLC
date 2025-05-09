@@ -14,28 +14,30 @@
     <script src="ai.bot.js"></script>
 </head>
 <body>
-    <header>
+    <header class="main-header">
         <div class="container header-content">
-            <a href="#" class="logo">NEXORA 1.0 RELEASE</a>
+            <a href="#" class="logo-area">
+                <span class="nexora-logo-text-animated">NEXORA</span>
+            </a>
             <nav>
                 <ul>
-                    <li><a href="#about">من نحن</a></li>
-                    <li><a href="#team">فريقنا</a></li>
-                    <li><a href="#services">خدماتنا</a></li>
-                    <li><a href="#portfolio">أعمالنا</a></li>
+                    <li><a href="#about" class="nav-link">من نحن</a></li>
+                    <li><a href="#team" class="nav-link">فريقنا</a></li>
+                    <li><a href="#services" class="nav-link">خدماتنا</a></li>
                 </ul>
             </nav>
         </div>
+        <div class="header-gold-divider"></div>
     </header>
 
-    <section class="hero section-animate">
+    <section class="hero section-animate" style="background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('gold-bg.jpg') center/cover;">
         <div class="container" style="position:relative;">
-
             <h1 class="title" style="position:relative;z-index:1;">NEXORA <br> نحن لا نتبع الاتجاهات. نحن نصنعها </h1>
             <p style="position:relative;z-index:1;">في عالم يتغير كل ثانية، نقف نحن – Nexora – بثبات، ليس فقط لتقديم الخدمات، ولكن لرسم ملامح جديدة للسوق.</p>
-            <a href="#contact" class="btn" style="position:relative;z-index:1;">تواصل معنا <i class="fas fa-paper-plane"></i></a>
+            <a href="#contact" class="btn gold-btn" style="position:relative;z-index:1;">تواصل معنا <i class="fas fa-paper-plane"></i></a>
         </div>
     </section>
+    <div class="gold-divider"></div>
 
     <section id="about" class="about section-animate">
         <div class="container">
@@ -52,6 +54,7 @@
             </div>
         </div>
     </section>
+    <div class="gold-divider"></div>
 
     <section id="services" class="services section-animate">
         <div class="container">
@@ -80,6 +83,7 @@
             </div>
         </div>
     </section>
+    <div class="gold-divider"></div>
 
     <section id="team" class="team section-animate">
         <div class="container">
@@ -129,7 +133,7 @@
             </div>
         </div>
     </section>
-
+    <div class="gold-divider"></div>
 
     <section id="contact" class="contact section-animate">
         <div class="container">
@@ -163,13 +167,14 @@
             </div>
         </div>
     </section>
+    <div class="gold-divider"></div>
 
     <footer class="modern-footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section brand-section">
-                    <div class="footer-logo">
-                        <img src="WhatsApp_Image_2025-04-18_at_20.50.17_43753dd3-removebg-preview.png" alt="NEXORA" class="footer-logo-img">
+                    <div class="footer-logo" style="display:flex;align-items:center;gap:10px;">
+                        <img src="WhatsApp_Image_2025-04-18_at_20.50.17_43753dd3-removebg-preview.png" alt="image/png" class="footer-logo-img" style="height:38px;width:auto;filter:drop-shadow(0 0 8px gold);">
                         <span class="footer-logo-text">NEXORA</span>
                     </div>
                     <p class="brand-description">نحن لا نتبع الاتجاهات. نحن نصنعها. نقدم حلولاً إبداعية تتجاوز توقعاتك وتحقق أهدافك.</p>
@@ -214,7 +219,7 @@
 
             <div class="footer-bottom">
                 <div class="copyright">
-                    <p> © 2025 NEXORA</p>
+                    <p> جميع الحقوق محفوظة © 2025 NEXORA</p>
                 </div>
                 <div class="footer-extra-links">
                     <a href="#">سياسة الخصوصية</a>
@@ -224,6 +229,11 @@
             </div>
         </div>
     </footer>
+    <div class="gold-divider"></div>
+
+    <button class="chat-widget-button" id="openChatBtn" style="background:linear-gradient(135deg,gold,#FFD700);color:#111;">
+        <i class="fas fa-comments"></i>
+    </button>
     <script>
         (function() {
             // Initialize EmailJS with your user ID
@@ -277,9 +287,6 @@
             <button id="sendMessageBtn"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
-    <button class="chat-widget-button" id="openChatBtn">
-        <i class="fas fa-comments"></i>
-    </button>
     <script>
     // Section and team card animation on scroll
     function animateOnScroll() {
@@ -316,6 +323,16 @@
         }
     })();
     </script>
+    <script>
+    window.addEventListener('scroll', function() {
+      var header = document.querySelector('.main-header');
+      if(window.scrollY > 30) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
+      }
+    });
+    </script>
 </body>
 </html>
-``` 
+
