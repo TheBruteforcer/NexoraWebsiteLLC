@@ -13,18 +13,20 @@
     <title>التسويق الرقمي - NEXORA</title>
 </head>
 <body>
-    <header>
+    <header class="main-header">
         <div class="container header-content">
-            <a href="index.html" class="logo">Nexora 1.0 Release</a>
+            <a href="#" class="logo-area">
+                <span class="nexora-logo-text-animated">NEXORA</span>
+            </a>
             <nav>
                 <ul>
-                    <li><a href="index.html#about">من نحن</a></li>
-                    <li><a href="index.html#team">فريقنا</a></li>
-                    <li><a href="index.html#services">خدماتنا</a></li>
-                    <li><a href="index.html#portfolio">أعمالنا</a></li>
+                    <li><a href="#about" class="nav-link">من نحن</a></li>
+                    <li><a href="#team" class="nav-link">فريقنا</a></li>
+                    <li><a href="#services" class="nav-link">خدماتنا</a></li>
                 </ul>
             </nav>
         </div>
+        <div class="header-gold-divider"></div>
     </header>
 
     <section class="digital-marketing-hero">
@@ -258,5 +260,15 @@
         </div>
     </footer>
 
+    <script>
+    window.addEventListener('scroll', function() {
+      var header = document.querySelector('.main-header');
+      if(window.scrollY > 30) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
+      }
+    });
+    </script>
 </body>
 </html>
