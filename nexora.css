@@ -85,10 +85,26 @@ nav ul li a {
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
 }
 
 nav ul li a:hover {
     color: var(--primary);
+}
+
+nav ul li a:hover::after {
+    width: 100%;
 }
 
 .hero {
@@ -98,6 +114,7 @@ nav ul li a:hover {
     text-align: center;
     border-bottom: 2px solid var(--primary);
     box-shadow: none;
+    animation: fadeIn 1s ease-out;
 }
 
 .title {
@@ -107,6 +124,7 @@ nav ul li a:hover {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    animation: fadeIn 1s ease-out;
 }
 
 .hero h1 {
@@ -115,12 +133,14 @@ nav ul li a:hover {
     font-weight: 700;
     color: var(--primary);
     text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    animation: fadeIn 1s ease-out, float 3s ease-in-out infinite;
 }
 
 .hero p {
     font-size: 1.2rem;
     max-width: 800px;
     margin: 0 auto 2rem;
+    animation: slideInLeft 1s ease-out 0.3s both;
 }
 
 .btn {
@@ -133,13 +153,34 @@ nav ul li a:hover {
     font-weight: bold;
     transition: all 0.3s ease;
     border: 1px solid var(--primary);
+    animation: scaleIn 0.5s ease-out 0.6s both;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn:hover {
     background-color: transparent;
     color: var(--primary);
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.05);
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn:hover::after {
+    width: 300px;
+    height: 300px;
 }
 
 section {
@@ -153,17 +194,24 @@ section {
     color: var(--primary);
     position: relative;
     padding-bottom: 1rem;
+    animation: fadeIn 1s ease-out;
 }
 
 .section-title::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
+    width: 0;
     height: 3px;
-    background-color: var(--primary);
+    background: var(--primary);
+    transform: translateX(-50%);
+    transition: width 0.6s ease;
+    animation: shimmer 2s infinite;
+}
+
+.section-title:hover::after {
+    width: 80px;
 }
 
 .about-content {
@@ -190,72 +238,161 @@ section {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     border: 2px solid var(--primary);
+    transition: all 0.5s ease;
+}
+
+.about-image:hover img {
+    transform: scale(1.05) rotate(1deg);
 }
 
 .services {
-    background: #000 !important;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(34, 34, 34, 0.95) 100%);
+    position: relative;
+    padding: 6rem 0;
+    overflow: hidden;
+}
+
+.services::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('modern-mosaic-wallpaper-dark-black-and-gold-background-texture-vector.jpg') center/cover;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.services::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent,
+        var(--primary) 20%,
+        var(--primary) 80%,
+        transparent
+    );
+    opacity: 0.5;
 }
 
 .services-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    padding: 2rem 0;
 }
 
 .service-card {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    padding: 2rem;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 15px;
+    padding: 2.5rem 2rem;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent,
+        var(--primary),
+        transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
-    border: 1px solid var(--primary);
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
 }
 
-/* تنسيقات خاصة للخدمات التي تعمل كروابط */
-a.service-card {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-}
-
-a.service-card:hover {
-    transform: translateY(-12px) scale(1.03);
-    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25), 0 2px 10px rgba(0,0,0,0.5);
-    border: 1.5px solid var(--primary);
-}
-
-a.service-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, var(--primary), transparent, var(--primary));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: inherit;
-    pointer-events: none;
-}
-
-a.service-card:hover::after {
-    opacity: 0.15;
+.service-card:hover::before {
+    opacity: 1;
 }
 
 .service-icon {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: var(--primary);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    animation: float 3s ease-in-out infinite;
+}
+
+.service-card:hover .service-icon {
+    animation: pulse 1s ease-in-out infinite;
 }
 
 .service-title {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
     color: var(--primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.service-description {
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* تحسين التجاوب مع الشاشات المختلفة */
+@media (max-width: 1200px) {
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 1.5rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .services {
+        padding: 4rem 0;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .service-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .services {
+        padding: 3rem 0;
+    }
+    
+    .service-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .service-icon {
+        font-size: 2.5rem;
+    }
+    
+    .service-title {
+        font-size: 1.3rem;
+    }
 }
 
 .team-grid {
@@ -269,12 +406,13 @@ a.service-card:hover::after {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid rgba(212, 175, 55, 0.2);
+    animation: fadeIn 0.8s ease-out;
 }
 
 .team-member:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.03);
     box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
     border: 1px solid var(--primary);
 }
@@ -294,8 +432,8 @@ a.service-card:hover::after {
     transition: all 0.5s ease;
 }
 
-.team-member:hover .member-image img {
-    transform: scale(1.1);
+.member-image:hover img {
+    transform: scale(1.1) rotate(2deg);
 }
 
 .member-info {
@@ -338,6 +476,8 @@ a.service-card:hover::after {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     border: 1px solid rgba(212, 175, 55, 0.2);
+    animation: fadeIn 0.8s ease-out;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .portfolio-image {
@@ -367,6 +507,7 @@ a.service-card:hover::after {
     opacity: 0;
     transition: all 0.3s ease;
     padding: 2rem;
+    animation: fadeIn 0.3s ease-out;
 }
 
 .portfolio-item:hover .portfolio-overlay {
@@ -473,6 +614,8 @@ a.service-card:hover::after {
     border-color: var(--primary);
     outline: none;
     box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
 }
 
 textarea.form-control {
@@ -550,12 +693,13 @@ footer::before {
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 215, 0, 0.1);
     transition: all 0.3s ease;
+    animation: fadeIn 0.8s ease-out;
 }
 
 .footer-section:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
     border-color: rgba(255, 215, 0, 0.3);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .footer-logo {
@@ -580,8 +724,8 @@ footer::before {
 }
 
 .footer-links a, .footer-extra-links a {
-    color: #ccc;
-    text-decoration: none !important;
+    color: #ddd;
+    text-decoration: none;
     transition: all 0.3s ease;
     font-size: 0.9rem;
     position: relative;
@@ -590,20 +734,20 @@ footer::before {
 .footer-links a::after, .footer-extra-links a::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 0;
     height: 1px;
     background: var(--primary);
     transition: width 0.3s ease;
-    display: none !important;
 }
 
 .footer-links a:hover, .footer-extra-links a:hover {
-    color: var(--primary) !important;
-    text-decoration: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
+    color: var(--primary);
+}
+
+.footer-links a:hover::after, .footer-extra-links a:hover::after {
+    width: 100%;
 }
 
 .social-links {
@@ -616,7 +760,7 @@ footer::before {
     border-radius: 12px;
     border: 1px solid rgba(255, 215, 0, 0.1);
     backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .social-link {
@@ -628,16 +772,18 @@ footer::before {
     justify-content: center;
     color: var(--primary);
     font-size: 1.1rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--primary);
+    transition: all 0.3s ease;
 }
 
 .social-link:hover {
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+    animation: pulse 1s ease-in-out infinite;
 }
 
 .social-link:hover i {
@@ -721,7 +867,7 @@ footer::before {
     border-radius: 15px;
     border: 1px solid rgba(255, 215, 0, 0.1);
     backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .social-links:hover {
@@ -928,12 +1074,15 @@ footer::before {
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     line-height: 1.7;
     position: relative;
+    animation: fadeIn 0.3s ease-out;
+    transition: all 0.3s ease;
 }
 .message.user {
     align-self: flex-end;
     background: linear-gradient(90deg, var(--primary) 0%, #fffbe6 100%);
     color: var(--dark);
     border-bottom-right-radius: 4px;
+    animation: slideInRight 0.3s ease-out;
 }
 .message.bot {
     align-self: flex-start;
@@ -941,13 +1090,40 @@ footer::before {
     color: #fff;
     border-bottom-left-radius: 4px;
     border: 1px solid var(--primary);
+    animation: slideInLeft 0.3s ease-out;
 }
 .message.typing {
-    background: transparent;
-    box-shadow: none;
-    color: var(--primary);
-    font-size: 1.5rem;
-    letter-spacing: 0.2em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 12px;
+    width: fit-content;
+    margin: 10px 0;
+}
+
+.message.typing span {
+    width: 6px;
+    height: 6px;
+    background: #FFD700;
+    border-radius: 50%;
+    animation: typingDot 1.4s infinite ease-in-out;
+}
+
+.message.typing span:nth-child(2) { animation-delay: 0.2s; }
+.message.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingDot {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+    30% {
+        transform: translateY(-3px);
+        opacity: 1;
+    }
 }
 
 .chat-input {
@@ -1013,11 +1189,13 @@ footer::before {
     cursor: pointer;
     z-index: 9999;
     transition: background 0.2s, color 0.2s, transform 0.2s;
+    animation: float 3s ease-in-out infinite;
 }
 .chat-widget-button:hover {
     background: #fffbe6;
     color: var(--primary);
-    transform: scale(1.08);
+    transform: scale(1.1) rotate(15deg);
+    animation: none;
 }
 
 .suggested-questions {
@@ -1353,7 +1531,7 @@ html {
 .footer-extra-links a::after {
     content: '';
     position: absolute;
-    bottom: -3px;
+    bottom: -2px;
     left: 0;
     width: 0;
     height: 1px;
@@ -1892,7 +2070,7 @@ html {
 }
 
 .message.bot {
-    background-color: rgb(0, 0, 0);
+    background-color: white;
     color: var(--black-color);
     align-self: flex-start;
     margin-right: auto;
@@ -2915,4 +3093,639 @@ nav ul {
     height: 32px;
     font-size: 1.1rem;
   }
+}
+
+/* تحسينات التجاوب مع الشاشات المختلفة */
+@media (max-width: 1200px) {
+    .container {
+        width: 95%;
+        padding: 0 15px;
+    }
+    
+    .services-grid, .team-grid, .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .about-image {
+        margin-top: 2rem;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .chat-widget {
+        width: 90%;
+        right: 5%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .service-card, .team-member, .portfolio-item {
+        margin: 0 auto;
+        max-width: 320px;
+    }
+    
+    .chat-widget {
+        width: 95%;
+        right: 2.5%;
+        height: 80vh;
+    }
+    
+    .chat-widget-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .modern-footer {
+        padding: 2rem 1rem;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        padding: 4rem 0;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .service-card, .team-member, .portfolio-item {
+        max-width: 100%;
+    }
+    
+    .chat-widget {
+        width: 100%;
+        right: 0;
+        height: 90vh;
+        border-radius: 0;
+    }
+    
+    .chat-widget-button {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .message {
+        max-width: 90%;
+        font-size: 0.9rem;
+    }
+    
+    .chat-input input {
+        font-size: 0.9rem;
+    }
+    
+    .footer-section {
+        padding: 1rem;
+    }
+    
+    .footer-logo-text {
+        font-size: 1.2rem;
+    }
+    
+    .brand-description {
+        font-size: 0.8rem;
+    }
+}
+
+/* تحسينات إضافية للتجاوب */
+@media (max-width: 480px) {
+    .header-content {
+        padding: 0.8rem;
+    }
+    
+    .nexora-logo-text-animated {
+        font-size: 1.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .service-title {
+        font-size: 1.2rem;
+    }
+    
+    .member-name {
+        font-size: 1.1rem;
+    }
+    
+    .chat-widget {
+        height: 95vh;
+    }
+    
+    .chat-header h3 {
+        font-size: 1rem;
+    }
+    
+    .message {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .chat-input {
+        padding: 8px;
+    }
+    
+    .chat-input input {
+        padding: 8px 12px;
+    }
+    
+    .footer-section {
+        padding: 0.8rem;
+    }
+}
+
+/* تحسينات للشاشات الكبيرة */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+    
+    .section-title {
+        font-size: 2.8rem;
+    }
+    
+    .service-card, .team-member, .portfolio-item {
+        transition: transform 0.3s ease;
+    }
+    
+    .service-card:hover, .team-member:hover, .portfolio-item:hover {
+        transform: translateY(-15px);
+    }
+}
+
+/* تحسينات للشاشات المتوسطة */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .services-grid, .team-grid, .portfolio-grid {
+        gap: 1.5rem;
+    }
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (min-width: 576px) and (max-width: 767px) {
+    .container {
+        max-width: 540px;
+    }
+    
+    .services-grid, .team-grid, .portfolio-grid {
+        gap: 1rem;
+    }
+}
+
+/* تحسينات للشاشات الصغيرة جداً */
+@media (max-width: 375px) {
+    .hero h1 {
+        font-size: 1.3rem;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .chat-widget {
+        height: 100vh;
+    }
+    
+    .chat-widget-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+/* تحسينات للشاشات العمودية */
+@media (max-height: 600px) {
+    .chat-widget {
+        height: 100vh;
+    }
+    
+    .chat-header {
+        padding: 0.8rem;
+    }
+    
+    .chat-messages {
+        padding: 0.8rem;
+    }
+    
+    .message {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 0.8rem;
+    }
+    
+    .chat-input {
+        padding: 0.5rem;
+    }
+}
+
+/* تحسينات للشاشات الأفقية */
+@media (min-width: 992px) and (orientation: landscape) {
+    .hero {
+        padding: 6rem 0;
+    }
+    
+    .about-content {
+        flex-direction: row;
+        text-align: left;
+    }
+    
+    .about-image {
+        margin-top: 0;
+    }
+}
+
+/* تأثيرات حركية عامة */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* تطبيق التأثيرات على العناصر */
+.hero h1 {
+    animation: fadeIn 1s ease-out;
+}
+
+.hero p {
+    animation: slideInLeft 1s ease-out 0.3s both;
+}
+
+.btn {
+    animation: scaleIn 0.5s ease-out 0.6s both;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.service-card {
+    animation: fadeIn 0.8s ease-out;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.service-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+}
+
+.team-member {
+    animation: scaleIn 0.8s ease-out;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.team-member:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+}
+
+.portfolio-item {
+    animation: fadeIn 0.8s ease-out;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+}
+
+/* تأثيرات القائمة */
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* تأثيرات البوت الدردشة */
+.chat-widget {
+    animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.chat-widget-button {
+    animation: float 3s ease-in-out infinite;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.chat-widget-button:hover {
+    transform: scale(1.1) rotate(15deg);
+    animation: none;
+}
+
+/* تأثيرات الرسائل */
+.message {
+    animation: fadeIn 0.3s ease-out;
+    transition: all 0.3s ease;
+}
+
+.message.user {
+    animation: slideInRight 0.3s ease-out;
+}
+
+.message.bot {
+    animation: slideInLeft 0.3s ease-out;
+}
+
+/* تأثيرات الفوتر */
+.footer-section {
+    animation: fadeIn 0.8s ease-out;
+    transition: all 0.3s ease;
+}
+
+.footer-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
+}
+
+.social-link {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-link:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+}
+
+/* تأثيرات الأزرار */
+.gold-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.gold-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.gold-btn:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* تأثيرات الصور */
+.member-image img, .portfolio-image img {
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.member-image:hover img, .portfolio-image:hover img {
+    transform: scale(1.1);
+}
+
+/* تأثيرات العناوين */
+.section-title {
+    position: relative;
+    animation: fadeIn 1s ease-out;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: var(--primary);
+    transform: translateX(-50%);
+    transition: width 0.6s ease;
+}
+
+.section-title:hover::after {
+    width: 80px;
+}
+
+/* تأثيرات التمرير */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* تأثيرات النص */
+.nexora-logo-text-animated {
+    animation: goldShine 2.5s linear infinite alternate;
+}
+
+@keyframes goldShine {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* تأثيرات الخلفية */
+body {
+    animation: bgMove 8s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* تأثيرات الإدخال */
+.form-control {
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+}
+
+/* تأثيرات البطاقات */
+.service-card, .team-member, .portfolio-item {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.service-card:hover, .team-member:hover, .portfolio-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+}
+
+/* تأثيرات الروابط */
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary);
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+/* تأثيرات الأيقونات */
+.service-icon {
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.2) rotate(5deg);
+    color: var(--primary);
+}
+
+/* تأثيرات التحميل */
+.loader {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.loader img {
+    animation: float 2s ease-in-out infinite;
+}
+
+/* تأثيرات النص المتحرك */
+.animated-text {
+    display: inline-block;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* تأثيرات الظهور التدريجي */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* تأثيرات التمرير السلس */
+html {
+    scroll-behavior: smooth;
+}
+
+/* تأثيرات الأزرار الذهبية */
+.gold-btn {
+    background: linear-gradient(90deg, #FFD700 0%, #bfa43a 100%);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gold-btn:hover {
+    background: linear-gradient(90deg, #bfa43a 0%, #FFD700 100%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+}
+
+/* تأثيرات البطاقات عند التمرير */
+.card-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
