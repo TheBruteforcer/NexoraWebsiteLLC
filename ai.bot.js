@@ -80,9 +80,34 @@ document.addEventListener('DOMContentLoaded', function() {
     function addMessage(message, isUser = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-        messageDiv.textContent = message;
-        chatMessages.appendChild(messageDiv);
+        
+        if (isUser) {
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+        } else {
+            // For bot messages, type word by word
+            chatMessages.appendChild(messageDiv);
+            typeMessage(messageDiv, message);
+        }
+        
         chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function typeMessage(element, message) {
+        const words = message.split(' ');
+        let currentWord = 0;
+        
+        function showNextWord() {
+            if (currentWord < words.length) {
+                element.textContent += (currentWord === 0 ? '' : ' ') + words[currentWord];
+                currentWord++;
+                // Scroll to bottom after each word
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                setTimeout(showNextWord, 100);
+            }
+        }
+        
+        showNextWord();
     }
 
     // Show typing indicator while waiting for API response
