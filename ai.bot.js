@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const GROQ_API_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
     // IMPORTANT: In production, use environment variables or a secure method to store API keys
     // Don't expose API keys in client-side code - this should be handled by your backend
-    let GROQ_API_KEY = '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'; // This should be set securely from your backend
+    let GROQ_API_KEY = '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'; // This should be set securely from your backend
     
     // Conversation context to track user interaction
     let conversationContext = {
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //     });
         
         // For demo purposes:
-        GROQ_API_KEY = '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'; // Replace with your actual key
+        GROQ_API_KEY = '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'; // Replace with your actual key
     }
     
     // Call initialization
